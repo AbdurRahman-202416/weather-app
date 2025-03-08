@@ -1,43 +1,38 @@
-// src/components/CityInfo.jsx
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
-function CityInfo ({ cityInfo }) {
-  const [localTime, setLocalTime] = useState(null)
-  if (!cityInfo) return null
+function CityInfo({ cityInfo }) {
+  const [localTime, setLocalTime] = useState(null); // State to store the local time
+  if (!cityInfo) return null; // Return null if no city info is provided
 
   // Update the city's current local time every second
   useEffect(() => {
     const updateTime = () => {
-      const now = new Date()
-      // Convert current time to UTC
-      const utc = now.getTime() + now.getTimezoneOffset() * 60000
-      // Calculate the city's local time using the timezone offset from the API (in seconds)
-      const cityLocal = new Date(utc + cityInfo.timezone * 1000)
-      setLocalTime(cityLocal.toLocaleTimeString())
-    }
+      const now = new Date();
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000; // Convert to UTC
+      const cityLocal = new Date(utc + cityInfo.timezone * 1000); // Get city's local time using the timezone offset
+      setLocalTime(cityLocal.toLocaleTimeString()); // Update state with formatted time
+    };
 
-    updateTime() // Initial update
-    const intervalId = setInterval(updateTime, 1000) // Update every second
+    updateTime(); // Initial time update
+    const intervalId = setInterval(updateTime, 1000); // Set interval to update every second
 
-    return () => clearInterval(intervalId)
-  }, [cityInfo])
+    return () => clearInterval(intervalId); // Clean up the interval when the component is unmounted
+  }, [cityInfo]); // Re-run effect if cityInfo changes
 
-  // Convert Unix timestamps to local time strings
-  const sunrise = new Date(cityInfo.sunrise * 1000).toLocaleTimeString()
-  const sunset = new Date(cityInfo.sunset * 1000).toLocaleTimeString()
-  const timezoneHours = cityInfo.timezone / 3600
-  const formattedTimezone =
-    (timezoneHours >= 0 ? '+' : '-') + Math.abs(timezoneHours).toFixed(2)
+  // Convert Unix timestamps for sunrise and sunset to local time strings
+  const sunrise = new Date(cityInfo.sunrise * 1000).toLocaleTimeString();
+  const sunset = new Date(cityInfo.sunset * 1000).toLocaleTimeString();
+  const timezoneHours = cityInfo.timezone / 3600; // Convert timezone offset to hours
+  const formattedTimezone = (timezoneHours >= 0 ? '+' : '-') + Math.abs(timezoneHours).toFixed(2); // Format timezone as +/-
 
   return (
-    <div className='mb-4 p-4  rounded shadow'>
+    <div className='mb-4 p-4 rounded shadow'>
       <h2 className='text-xl font-bold mb-2'>
         {cityInfo.name}, {cityInfo.country}
       </h2>
       <p>
         <span className='font-semibold'>Population:</span> {cityInfo.population}
       </p>
-     
       <p>
         <span className='font-semibold'>Sunrise:</span> {sunrise}
       </p>
@@ -53,7 +48,7 @@ function CityInfo ({ cityInfo }) {
         </p>
       )}
     </div>
-  )
+  );
 }
 
-export default CityInfo
+export default CityInfo;

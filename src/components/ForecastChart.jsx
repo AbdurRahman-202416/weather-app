@@ -74,7 +74,7 @@ function ForecastChart({ forecast }) {
   };
 
   const options = {
-    responsive: true, // Ensures the chart is responsive
+    responsive: true,
     maintainAspectRatio: false, // Allows the chart to resize based on container dimensions
     plugins: {
       legend: { 
