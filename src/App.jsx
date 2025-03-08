@@ -87,7 +87,7 @@ function App () {
   return (
     <div className='min-h-screen  p-4'>
       <div className='w-full sm:max-w-[80%] mx-auto bg-transparent backdrop-filter backdrop-blur-3xl  shadow-lg rounded-lg p-6'>
-        <h1 className='text-3xl font-bold mb-4 text-center'>Weather App</h1>
+        <h1 className='text-3xl border  font-bold mb-4 text-center'>Weather App</h1>
         <WeatherForm
           city={city}
           setCity={setCity}

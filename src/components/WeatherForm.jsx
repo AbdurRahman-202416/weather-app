@@ -1,15 +1,20 @@
-
 import React from 'react';
 
 function WeatherForm({ city, setCity, handleSubmit }) {
   return (
-    <form onSubmit={handleSubmit} className='flex mx-auto max-w-sm gap-2 mb-4'>
+    <div> 
+      <h1 htmlFor='city' className='text-white py-2 mb-1 text-center mx-auto font-semibold'>
+        Enter city name
+      </h1>
+       <form onSubmit={handleSubmit} className='flex mx-auto max-w-md gap-2 mb-4'>
+     
       <input
         type='text'
+        id='city'
         placeholder='Enter city name'
         value={city}
         onChange={e => setCity(e.target.value)}
-        className='flex-1 p-2 mx-auto  border border-gray-300 rounded'
+        className='flex-1 p-2 mx-auto border border-gray-300 rounded'
       />
       <button
         type='submit'
@@ -18,6 +23,8 @@ function WeatherForm({ city, setCity, handleSubmit }) {
         Search
       </button>
     </form>
+    </div>
+   
   );
 }
 
